@@ -20,7 +20,10 @@ export const actFetchAllTask = createAsyncThunk(
   async (params = {}) => {
     const response = await TaskAPIs.getAllTasks(params);
 
-    return response.data;
+    return {
+      data: response.data,
+      total: response.headers.get("X-Total-Count"),
+    };
   }
 );
 
@@ -76,11 +79,9 @@ const taskSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(actFetchAllTask.fulfilled, (state, action) => {
-      const response = action.payload;
-      const { data } = response.data;
-      state.tasks = data;
+      state.tasks = action.payload.data;
       state.isLoading = false;
-      state.pagination.total = response.data.items;
+      state.pagination.total = action.payload.total;
     });
     builder.addCase(actFetchTaskById.fulfilled, (state, action) => {
       state.currenTask = action.payload;
@@ -97,7 +98,7 @@ export const actCreateNewTask = (task) => {
   return async (dispatch) => {
     try {
       await TaskAPIs.createTask(task);
-      dispatch(actFetchAllTask());
+      message.success("Tạo mới task thành công!!!");
     } catch (error) {}
   };
 };

@@ -16,20 +16,22 @@ const AllTasks = () => {
     dispatch(
       actFetchAllTask({
         _page: 1,
-        _per_page: pagination.limitPerpage,
+        _limit: pagination.limitPerpage,
         q: searchKey,
       })
     );
+    return () => {
+      dispatch(setNewPage(1));
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleChangePage = (newPage) => {
-    console.log(newPage);
     dispatch(setNewPage(newPage));
     dispatch(
       actFetchAllTask({
         _page: newPage,
-        _per_page: pagination.limitPerpage,
+        _limit: pagination.limitPerpage,
         q: searchKey,
       })
     );
@@ -46,6 +48,7 @@ const AllTasks = () => {
         <>
           <MainContentTask tasks={tasks}></MainContentTask>
           <Pagination
+            style={{ paddingTop: "10px" }}
             defaultPageSize={pagination.limitPerpage}
             current={pagination.currentPage}
             total={pagination.total}
