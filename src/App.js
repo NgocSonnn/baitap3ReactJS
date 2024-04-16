@@ -14,7 +14,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<MainLayout></MainLayout>}>
-            <Route index element={<AllTasks></AllTasks>}></Route>
+            {/* <Route index element={<AllTasks></AllTasks>}></Route> */}
             <Route
               path={ROUTES.ALL_TASK}
               element={<AllTasks></AllTasks>}
@@ -34,16 +34,13 @@ function App() {
             <Route
               path={ROUTES.DONE_TASK}
               element={<DoneTasks></DoneTasks>}
-            ></Route>{" "}
+            ></Route>
             <Route
               path={ROUTES.ADD_NEW}
               element={<AddNewTask></AddNewTask>}
             ></Route>
           </Route>
-          <Route
-            path={"/"}
-            element={<Navigate to={ROUTES.ALL_TASK}></Navigate>}
-          ></Route>
+          <Route path="/" element={<Navigate to={"/all-task"} />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

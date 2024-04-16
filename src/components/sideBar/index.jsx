@@ -5,6 +5,7 @@ import { ROUTES } from "../../constants/routes";
 
 const SideBar = () => {
   const location = useLocation();
+
   return (
     <div className="side-bar-container">
       <ul className="side-bar-container__list">

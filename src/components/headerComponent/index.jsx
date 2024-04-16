@@ -66,7 +66,13 @@ const HeaderComponents = () => {
           value={searchKey}
           onChange={handleChangeInputSearch}
         ></Input>
-        <Button type="submit">Search</Button>
+        <button
+          className="header-container__search-btn"
+          onClick={handleSearchTask}
+          type="submit"
+        >
+          Search
+        </button>
       </form>
     </div>
   );
